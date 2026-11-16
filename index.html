@@ -9,8 +9,7 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="theme-color" content="#ffffff" />
 
-    <!-- META PIXEL: base code only (PageView). NO ViewContent on this page — see SOP - Tracking. -->
-    <!-- <script> !function(f,b,e,v,n,t,s){...}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init','PIXEL_ID'); fbq('track','PageView'); </script> -->
+    <!-- Tracking: sentinel (painel.healthhub.site) — substitui o pixel Meta direto -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -355,6 +354,13 @@
         var el = document.getElementById("today");
         if (el) el.textContent = d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
       })();
+    </script>
+
+    <!-- Sentinel tracking (painel.healthhub.site) -->
+    <script>
+    (function(s,e,n,t,i){s[n]=s[n]||function(){(s[n].q=s[n].q||[]).push(arguments)};
+    var js=e.createElement('script');js.async=1;js.src=t+'?tid='+i;
+    e.head.appendChild(js)})(window,document,'sentinel','https://painel.healthhub.site/api/t/tracker.js','d6a8ebb0-bb3b-4328-a19b-05075c8004e7');
     </script>
   </body>
 </html>
