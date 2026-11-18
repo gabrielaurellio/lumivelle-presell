@@ -147,8 +147,11 @@
       .reason__body h3 { margin-top: 0; }
       .reason__cap { font-size: 14px; color: #8a7a7a; }
 
+      .only-desktop { display: none; }
       @media (min-width: 900px) {
         :root { --maxw: 760px; }
+        .only-mobile { display: none !important; }
+        .only-desktop { display: block; }
         .reason { display: grid; grid-template-columns: 290px 1fr; gap: 28px;
                   align-items: start; margin: 40px 0 48px; }
         .reason__media { order: 0; margin: 0; max-width: none; }
@@ -157,8 +160,40 @@
         .reason__body p { font-size: 18px; }
         .fig { max-width: 520px; }
         .fig--wide { max-width: 100%; }
-        .callout .fig { max-width: 400px; }
         .hero { max-width: 520px; }
+        /* Item 1: comparison table */
+        .cmp { margin: 8px 0 26px; }
+        .cmp__row { display: grid; grid-template-columns: 1.5fr 1.1fr 1fr 1fr 1fr; align-items: stretch; }
+        .cmp__row > span { padding: 14px 10px; text-align: center; font-size: 16px;
+                           display: flex; align-items: center; justify-content: center; }
+        .cmp__row > span:first-child { justify-content: flex-start; text-align: left;
+                                       font-weight: 700; color: #3f2c2c; padding-left: 16px; }
+        .cmp__row:nth-child(even) { background: #fbf3f6; }
+        .cmp__row--head > span { font-family: var(--font-display); font-weight: 900; font-size: 15px;
+                                 color: #3f2c2c; padding: 16px 8px; }
+        .cmp__win { background: var(--plum); color: #fff !important; }
+        .cmp__row--head .cmp__win { border-radius: 10px 10px 0 0; font-size: 17px; }
+        .cmp__row:nth-last-of-type(1) .cmp__win { border-radius: 0 0 10px 10px; }
+        .cmp .y { color: #0f8340; font-weight: 900; font-size: 20px; }
+        .cmp .n { color: #c0392b; font-weight: 900; font-size: 18px; }
+        .cmp .cmp__win.y { color: #fff; }
+        .cmp__cap { font-size: 14px; color: #8a7a7a; text-align: center; margin: 10px 0 0; }
+        /* Item 2: callout grid */
+        .callout { display: grid; grid-template-columns: 210px 1fr; gap: 24px; align-items: center; padding: 20px 24px; }
+        .callout .fig { max-width: none; margin: 0; border-radius: 8px; }
+        .callout p { font-size: 18px; }
+        /* Item 3: horizontal timeline */
+        .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 34px 0 30px;
+                    border-top: 3px solid var(--plum); }
+        .timeline li { position: relative; padding: 22px 14px 0 0; border-bottom: 0; font-size: 16px; line-height: 1.45; }
+        .timeline li::before { content: ""; position: absolute; top: -10.5px; left: 0; width: 18px; height: 18px;
+                               border-radius: 50%; background: var(--plum); border: 3px solid #fff; box-sizing: border-box; }
+        .timeline b { display: block; font-size: 22px; margin: 0 0 6px; }
+        /* Item 4: tip card */
+        .tip { display: grid; grid-template-columns: 1fr 230px; gap: 26px; align-items: center;
+               margin: 10px 0 26px; padding: 22px 24px; border-radius: 10px; background: #fbf3f6; }
+        .tip p { margin: 0; font-size: 18px; }
+        .tip .fig { max-width: none; margin: 0; }
       }
 
       @media (max-width: 640px) {
@@ -223,10 +258,25 @@
           on your knee is type I: the patch collagen. And it's type III your body quietly stops making after
           30. Harvard measured it: between 25 and 55, it drops by more than <strong>75%</strong>.
         </p>
-        <figure class="fig">
+        <figure class="fig only-mobile">
           <img src="img/us-vs-them.jpg" alt="Botox, creams and collagen powder compared with Korean gelatin" width="400" height="400" loading="lazy" />
           <figcaption class="fig__cap">Only one of the four rebuilds type III. And keeps it.</figcaption>
         </figure>
+        <div class="cmp only-desktop" role="table" aria-label="Botox, creams and collagen powder compared with Korean gelatin">
+          <div class="cmp__row cmp__row--head">
+            <span></span>
+            <span class="cmp__win">Korean Gelatin</span>
+            <span>Botox &amp; Fillers</span>
+            <span>$300 Creams</span>
+            <span>Collagen Powder</span>
+          </div>
+          <div class="cmp__row"><span>Rebuilds type III collagen</span><span class="cmp__win y">&#10003;</span><span class="n">&#10005;</span><span class="n">&#10005;</span><span class="n">&#10005;</span></div>
+          <div class="cmp__row"><span>Treats the cause, not the surface</span><span class="cmp__win y">&#10003;</span><span class="n">&#10005;</span><span class="n">&#10005;</span><span class="n">&#10005;</span></div>
+          <div class="cmp__row"><span>No needle, no procedure</span><span class="cmp__win y">&#10003;</span><span class="n">&#10005;</span><span class="y">&#10003;</span><span class="y">&#10003;</span></div>
+          <div class="cmp__row"><span>Lasts after you stop</span><span class="cmp__win y">&#10003;</span><span class="n">&#10005;</span><span class="n">&#10005;</span><span class="n">&#10005;</span></div>
+          <div class="cmp__row"><span>Safe after 60</span><span class="cmp__win y">&#10003;</span><span class="n">&#10005;</span><span class="y">&#10003;</span><span class="y">&#10003;</span></div>
+          <p class="cmp__cap">Only one of the four rebuilds type III. And keeps it.</p>
+        </div>
         <p>
           Think about it: if one jar of collagen fixed it, no woman would ever buy a second one. The collagen
           market is worth billions.
@@ -257,7 +307,7 @@
         <div class="reason">
           <figure class="reason__media">
             <img src="img/retinol-cycle.jpg" alt="The retinol cycle: apply, surface sheds, nothing rebuilt below, comes back worse" width="400" height="400" loading="lazy" />
-            <span class="reason__tag">Surface only.</span>
+            <span class="reason__tag">Shine on top. Nothing rebuilt.</span>
           </figure>
           <div class="reason__body">
             <h3><span class="n">5.</span>Retinol works on the top board.</h3>
@@ -272,7 +322,7 @@
         <div class="reason">
           <figure class="reason__media">
             <img src="img/yoyo.jpg" alt="Inject, firm, stop, collapse: each time lower than before" width="400" height="400" loading="lazy" />
-            <span class="reason__tag">The collapse cycle.</span>
+            <span class="reason__tag">Every round ends lower.</span>
           </figure>
           <div class="reason__body">
             <h3><span class="n">4.</span>The more you inject, the less your body makes.</h3>
@@ -288,7 +338,7 @@
         <div class="reason">
           <figure class="reason__media">
             <img src="img/pillow.jpg" alt="A white pillowcase in the morning with the mark of last night's cream" width="400" height="400" loading="lazy" />
-            <span class="reason__tag">Ends up on the pillow.</span>
+            <span class="reason__tag">Your $300 cream ends up here.</span>
           </figure>
           <div class="reason__body">
             <h3><span class="n">3.</span>The collagen you put on at night wakes up on your pillow.</h3>
@@ -304,7 +354,7 @@
         <div class="reason">
           <figure class="reason__media">
             <img src="img/box-vs-jeju.jpg" alt="Boxed strawberry gelatin next to pure pink Korean gelatin" width="400" height="400" loading="lazy" />
-            <span class="reason__tag">Not the same gelatin.</span>
+            <span class="reason__tag">Same name. Wrong collagen.</span>
           </figure>
           <div class="reason__body">
             <h3><span class="n">2.</span>The gelatin from the box doesn't count.</h3>
@@ -322,7 +372,7 @@
         <div class="reason">
           <figure class="reason__media">
             <img src="img/bowl.jpg" alt="The bowl of Korean gelatin, with three unlabeled ingredients behind it" width="400" height="400" loading="lazy" />
-            <span class="reason__tag">It's how it's made.</span>
+            <span class="reason__tag">It only works made this way.</span>
           </figure>
           <div class="reason__body">
             <h3><span class="n">1.</span>It only works prepared one way.</h3>
@@ -337,7 +387,7 @@
         </div>
 
         <h2>What her patients report, and where</h2>
-        <figure class="fig fig--wide">
+        <figure class="fig fig--wide only-mobile">
           <img src="img/timeline.jpg" alt="Week 2 firms to the touch; month 1 lines fade; month 2 people start asking; month 3 locks in" width="600" height="400" loading="lazy" />
         </figure>
         <ul class="timeline">
@@ -350,15 +400,17 @@
           Neck, jowls, chest and hands (the places a turtleneck hides and no cream treats) are where women
           notice it first.
         </p>
-        <p>
-          One honest piece of advice: <strong>take a photo today, before you watch.</strong> Face and neck, no
-          filter, in the light from a window. Skin changes too slowly to notice in the everyday mirror. A few
-          weeks from now, that photo is what will make you stop and say, “oh.”
-        </p>
-        <figure class="fig">
-          <img src="img/before-photo.jpg" alt="Taking a photo of the neck and jawline in the bathroom mirror" width="400" height="400" loading="lazy" />
-          <figcaption class="fig__cap">Neck and jawline, window light, no filter. Today.</figcaption>
-        </figure>
+        <div class=”tip”>
+          <p>
+            One honest piece of advice: <strong>take a photo today, before you watch.</strong> Face and neck, no
+            filter, in the light from a window. Skin changes too slowly to notice in the everyday mirror. A few
+            weeks from now, that photo is what will make you stop and say, “oh.”
+          </p>
+          <figure class=”fig”>
+            <img src=”img/before-photo.jpg” alt=”Taking a photo of the neck and jawline in the bathroom mirror” width=”400” height=”400” loading=”lazy” />
+            <figcaption class=”fig__cap”>Neck and jawline, window light, no filter. Today.</figcaption>
+          </figure>
+        </div>
       </div>
     </article>
 
