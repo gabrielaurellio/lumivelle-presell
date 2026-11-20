@@ -11,17 +11,23 @@
 
     <!-- Tracking: sentinel (painel.healthhub.site) — substitui o pixel Meta direto -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;900&family=Inter:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" as="image" href="img/hero-poster.webp" fetchpriority="high">
+    <link rel="preload" as="font" type="font/woff2" href="fonts/inter-tight-900.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="fonts/inter-400.woff2" crossorigin>
+    <link rel="preconnect" href="https://connect.facebook.net">
 
     <!-- Same look as hw/ld03 (assets/pages/vsl/css/style.css): Inter Tight plum headline,
          cocoa body, the kit's green button, rose "As featured in" band. Self-contained so
          vturb.min.js / vsl-pitch.js (player stage logic) are NOT loaded here. -->
     <style>
+      @font-face { font-family: "Inter"; font-weight: 400; font-style: normal; font-display: swap;
+        src: url("fonts/inter-400.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 700; font-style: normal; font-display: swap;
+        src: url("fonts/inter-700.woff2") format("woff2"); }
+      @font-face { font-family: "Inter Tight"; font-weight: 700; font-style: normal; font-display: swap;
+        src: url("fonts/inter-tight-700.woff2") format("woff2"); }
+      @font-face { font-family: "Inter Tight"; font-weight: 900; font-style: normal; font-display: swap;
+        src: url("fonts/inter-tight-900.woff2") format("woff2"); }
       :root {
         --font-display: "Inter Tight", Inter, "Helvetica Neue", Arial, sans-serif;
         --font-body: Inter, "Helvetica Neue", Arial, sans-serif;
@@ -40,6 +46,7 @@
       html { -webkit-text-size-adjust: 100%; }
       body { background: var(--paper); color: var(--cocoa); font-family: var(--font-body); line-height: 1.55; font-size: 18px; }
       img { display: block; max-width: 100%; height: auto; }
+      video { aspect-ratio: 1 / 1; background: #f6f0f2; }
       .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 16px; }
 
       /* Headline — same block as the VSL page */
@@ -247,9 +254,10 @@
     <div class="wrap">
       <!-- HERO IMAGE: before/after of the same woman (AI-generated, 15/11). -->
       <figure class="hero">
-        <video autoplay loop muted playsinline preload="auto" poster="img/hero.jpg" width="400" height="400"
-               style="display:block;width:100%;height:auto" data-anim="img/hero-anim.webp">
-          <source src="img/hero.mp4?v=2" type="video/mp4">
+        <video id="hero-video" loop muted playsinline preload="none"
+               poster="img/hero-poster.webp" data-anim="img/hero-anim.webp"
+               width="400" height="400" style="display:block;width:100%;height:auto">
+          <source src="img/hero.mp4" type="video/mp4">
         </video>
         <figcaption class="hero__cap">One of the dermatologist's patients, four months apart. Same light, same room, no makeup.</figcaption>
       </figure>
@@ -283,7 +291,7 @@
           30. Harvard measured it: between 25 and 55, it drops by more than <strong>75%</strong>.
         </p>
         <figure class="fig only-mobile">
-          <img src="img/us-vs-them.jpg" alt="Botox, creams and collagen powder compared with Korean gelatin" width="400" height="400" loading="lazy" />
+          <img src="img/us-vs-them.webp" alt="Botox, creams and collagen powder compared with Korean gelatin" width="400" height="400" loading="lazy" />
           <figcaption class="fig__cap">Only one of the four rebuilds type III. And keeps it.</figcaption>
         </figure>
         <div class="cmp only-desktop" role="table" aria-label="Botox, creams and collagen powder compared with Korean gelatin">
@@ -312,7 +320,7 @@
 
         <div class="callout">
           <figure class="fig">
-            <video loop muted playsinline preload="none" poster="img/pinch.jpg" width="400" height="400"
+            <video loop muted playsinline preload="none" data-poster="img/pinch-poster.webp" width="400" height="400"
                    style="display:block;width:100%;height:auto" class="lazy-video" data-anim="img/pinch-anim.webp">
               <source src="img/pinch.mp4?v=2" type="video/mp4">
             </video>
@@ -333,7 +341,7 @@
 
         <div class="reason">
           <figure class="reason__media">
-            <video loop muted playsinline preload="none" poster="img/retinol.jpg" width="400" height="400"
+            <video loop muted playsinline preload="none" data-poster="img/retinol-poster.webp" width="400" height="400"
                    style="display:block;width:100%;height:auto" class="lazy-video" data-anim="img/retinol-anim.webp">
               <source src="img/retinol-v2.mp4" type="video/mp4">
             </video>
@@ -351,7 +359,7 @@
 
         <div class="reason">
           <figure class="reason__media">
-            <video loop muted playsinline preload="none" poster="img/needle.jpg" width="400" height="400"
+            <video loop muted playsinline preload="none" data-poster="img/needle-poster.webp" width="400" height="400"
                    style="display:block;width:100%;height:auto" class="lazy-video" data-anim="img/needle-anim.webp">
               <source src="img/needle.mp4" type="video/mp4">
             </video>
@@ -370,7 +378,7 @@
 
         <div class="reason">
           <figure class="reason__media">
-            <video loop muted playsinline preload="none" poster="img/pillow.jpg" width="400" height="400"
+            <video loop muted playsinline preload="none" data-poster="img/pillow-poster.webp" width="400" height="400"
                    style="display:block;width:100%;height:auto" class="lazy-video" data-anim="img/pillow-anim.webp">
               <source src="img/pillow.mp4?v=2" type="video/mp4">
             </video>
@@ -389,7 +397,7 @@
 
         <div class="reason">
           <figure class="reason__media">
-            <video loop muted playsinline preload="none" poster="img/gelatin.jpg" width="400" height="400"
+            <video loop muted playsinline preload="none" data-poster="img/gelatin-poster.webp" width="400" height="400"
                    style="display:block;width:100%;height:auto" class="lazy-video" data-anim="img/gelatin-anim.webp">
               <source src="img/gelatin-v2.mp4" type="video/mp4">
             </video>
@@ -410,7 +418,7 @@
 
         <div class="reason">
           <figure class="reason__media">
-            <video loop muted playsinline preload="none" poster="img/bowl.jpg" width="400" height="400"
+            <video loop muted playsinline preload="none" data-poster="img/bowl-poster.webp" width="400" height="400"
                    style="display:block;width:100%;height:auto" class="lazy-video" data-anim="img/bowl-anim.webp">
               <source src="img/bowl.mp4" type="video/mp4">
             </video>
@@ -430,7 +438,7 @@
 
         <h2>What her patients report, and where</h2>
         <figure class="fig fig--wide only-mobile">
-          <img src="img/timeline.jpg" alt="Week 2 firms to the touch; month 1 lines fade; month 2 people start asking; month 3 locks in" width="600" height="400" loading="lazy" />
+          <img src="img/timeline.webp" alt="Week 2 firms to the touch; month 1 lines fade; month 2 people start asking; month 3 locks in" width="600" height="400" loading="lazy" />
         </figure>
         <ul class="timeline">
           <li><b>Week 2</b> Skin firms to the touch. The pinch starts to snap back.</li>
@@ -450,7 +458,7 @@
           </p>
           <figure class="fig">
             <video class="lazy-video" loop muted playsinline preload="none"
-                   poster="img/before-photo.jpg" data-anim="img/selfie-anim.webp"
+                   data-poster="img/selfie-poster.webp" data-anim="img/selfie-anim.webp"
                    width="400" height="400" style="display:block;width:100%;height:auto">
               <source src="img/selfie.mp4" type="video/mp4">
             </video>
@@ -471,7 +479,7 @@
 
     <div class="wrap">
       <a class="vsl-thumb buylink" href="https://lm.healthhub.site/">
-        <img src="img/vsl-frame.jpg" alt="Watch the interview" width="1000" height="1233" loading="lazy" />
+        <img src="img/vsl-frame.webp" alt="Watch the interview" width="1000" height="1233" loading="lazy" />
         <span class="vsl-thumb__play play-pulse" aria-hidden="true"></span>
       </a>
     </div>
@@ -487,9 +495,9 @@
     <section class="press" aria-label="As featured in">
       <h2 class="press__title">AS FEATURED IN</h2>
       <div class="press__logos">
-        <img src="img/fox-news.webp" alt="Fox News" width="141" height="110" />
-        <img src="img/abc-news.webp" alt="ABC News" width="226" height="153" />
-        <img src="img/cbs-news.webp" alt="CBS" width="117" height="112" />
+        <img src="img/fox-news.webp" alt="Fox News" width="141" height="110" loading="lazy" />
+        <img src="img/abc-news.webp" alt="ABC News" width="226" height="153" loading="lazy" />
+        <img src="img/cbs-news.webp" alt="CBS" width="117" height="112" loading="lazy" />
       </div>
     </section>
 
@@ -510,8 +518,7 @@
         if (v.dataset.fb || !v.dataset.anim) return;
         v.dataset.fb = '1';
         var img = new Image();
-        img.src = v.dataset.anim;
-        img.alt = '';
+        img.src = v.dataset.anim; img.alt = '';
         img.width = 400; img.height = 400;
         img.style.cssText = 'display:block;width:100%;height:auto';
         v.replaceWith(img);
@@ -522,18 +529,29 @@
           if (e && e.name === 'NotAllowedError') fallback(v);
         });
       }
-      var hero = document.querySelector('video[autoplay]');
-      if (hero) tryPlay(hero);
+      var hero = document.getElementById('hero-video');
+      function startHero() { if (hero) tryPlay(hero); }
+      if (document.readyState === 'complete') startHero();
+      else window.addEventListener('load', startHero);
+
       var lazy = document.querySelectorAll('video.lazy-video');
       if (!lazy.length) return;
-      var observer = new IntersectionObserver(function (entries) {
+      var posterObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var v = entry.target;
+          if (v.dataset.poster) { v.poster = v.dataset.poster; }
+          posterObs.unobserve(v);
+        });
+      }, { rootMargin: '800px' });
+      var playObs = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           var v = entry.target;
-          if (!v.isConnected) { observer.unobserve(v); return; }
+          if (!v.isConnected) { playObs.unobserve(v); return; }
           if (entry.isIntersecting) tryPlay(v); else v.pause();
         });
       }, { rootMargin: '200px' });
-      lazy.forEach(function (v) { observer.observe(v); });
+      lazy.forEach(function (v) { posterObs.observe(v); playObs.observe(v); });
     })();
     </script>
 
