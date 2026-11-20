@@ -94,18 +94,39 @@
       /* VSL frame thumbnail with play overlay */
       .vsl-thumb { display: block; position: relative; margin: 0 auto 16px; width: 100%; max-width: 400px; border-radius: 6px; overflow: hidden; }
       .vsl-thumb img { width: 100%; display: block; }
-      .vsl-thumb::after {
-        content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      .vsl-thumb__play {
+        position: absolute; top: 50%; left: 50%;
+        --px: -50%; --py: -50%;
+        transform: translate(var(--px), var(--py));
         width: 72px; height: 72px; border-radius: 50%;
         background: rgba(255,255,255,0.85);
         box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        z-index: 1; pointer-events: none;
       }
-      .vsl-thumb::before {
+      /* triangle */
+      .vsl-thumb__play::after {
         content: ""; position: absolute; top: 50%; left: 50%;
         transform: translate(-38%, -50%);
-        z-index: 1;
         border-style: solid; border-width: 14px 0 14px 24px;
         border-color: transparent transparent transparent var(--plum);
+      }
+      /* pulse ring */
+      .play-pulse { animation: playPulse 1.6s ease-in-out infinite; }
+      .play-pulse::before {
+        content: ""; position: absolute; inset: 0; border-radius: 50%;
+        border: 3px solid #935094; opacity: 0;
+        animation: playRing 1.6s ease-out infinite; pointer-events: none;
+      }
+      @keyframes playPulse {
+        0%, 100% { transform: translate(var(--px, 0), var(--py, 0)) scale(1); }
+        50%      { transform: translate(var(--px, 0), var(--py, 0)) scale(1.12); }
+      }
+      @keyframes playRing {
+        0%   { transform: scale(1);   opacity: .7; }
+        100% { transform: scale(1.9); opacity: 0; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .play-pulse, .play-pulse::before { animation: none; }
       }
 
       .vsl-cta { padding: 4px 0 6px; }
@@ -451,6 +472,7 @@
     <div class="wrap">
       <a class="vsl-thumb buylink" href="https://lm.healthhub.site/">
         <img src="img/vsl-frame.jpg" alt="Watch the interview" width="1000" height="1233" loading="lazy" />
+        <span class="vsl-thumb__play play-pulse" aria-hidden="true"></span>
       </a>
     </div>
 
